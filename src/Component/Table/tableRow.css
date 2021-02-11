@@ -1,0 +1,51 @@
+/** @format */
+
+.listRowStyle {
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  border-color: #4344454a;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-width: 0px;
+}
+.listLastRowStyle {
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  border-color: #4344454a;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-width: 1px;
+}
+
+.titleTextStyle {
+  padding-left: 10px;
+  font-size: 14px;
+  color: #24292e;
+}
+.dateshowTextStyle {
+  padding-top: 5px;
+  padding-left: 27px;
+  font-size: 12px;
+  color: #959da5;
+}
+
+.onMouseOver {
+  background-color: #f6f8fa;
+}
+.onMouseLeave {
+  background-color: white;
+}

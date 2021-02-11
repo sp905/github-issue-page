@@ -1,0 +1,74 @@
+/** @format */
+
+.containerStyleDetail {
+  padding-left: 20px;
+  padding-top: 20px;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-size: 25px;
+}
+.numberStyle {
+  color: #6a737d;
+  font-size: 25px;
+  padding-left: 8px;
+}
+.detailHeaderContainerStyle {
+  padding-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  border-bottom-width: 1px;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-top: 10px;
+}
+.alertSvgStyle {
+  position: absolute;
+  padding-left: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.openBatchStyle {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 30px;
+  padding-right: 15px;
+  border-radius: 20px;
+  color: white;
+  background-color: #28a745;
+}
+.closeBatchStyle {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 30px;
+  padding-right: 15px;
+  border-radius: 20px;
+  color: white;
+  background-color: red;
+}
+.logintextstyle {
+  padding-left: 13px;
+  color: #586069;
+  font-size: 14px;
+}
+.issueTextStyle {
+  padding-left: 13px;
+  color: #5860698c;
+  font-size: 14px;
+}
+.bubbleStyle {
+  margin-left: 5px;
+  width: 4px;
+  height: 4px;
+  background-color: #5860698c;
+  border-radius: 2px;
+}
+.commentsTextStyle {
+  color: #5860698c;
+  padding-left: 5px;
+}

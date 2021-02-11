@@ -1,0 +1,62 @@
+
+.detailContainerStyle {
+  display: flex;
+  padding-top: 15px;
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+
+.avtarStyle {
+  width: 40;
+  height: 40px;
+  border-radius: 20px;
+}
+.traingleStyle {
+  background-color: transparent;
+  position: absolute;
+  left: 54px;
+  width: 0px;
+  height: 0px;
+  margin-top: 6px;
+  transform: rotateZ(90deg);
+  border-left: 11px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 16px solid rgba(88, 96, 105, 0.05);
+  border-bottom: 16px solid transparent;
+}
+.detailHeaderStyle {
+  flex-direction: column;
+  margin-left: 20px;
+  border-radius: 4px;
+  display: flex;
+  border: 1.5px solid rgba(88, 96, 105, 0.05);
+  flex: 1;
+  margin-right: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 3px -5px, rgba(0, 0, 0, 0.19) 0px 0px 0px 0px;
+}
+
+.detailBodyStyle {
+  border-bottom-style: solid;
+  border-bottom-color: rgba(67, 68, 69, 0.05);
+  border-bottom-width: 1px;
+  display: flex;
+  background-color: rgba(88, 96, 105, 0.05);
+  flex: 1;
+  align-items: center;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.commentedStyle {
+  padding-left: 5px;
+  color: #5860698c;
+}
+.bodyStyle {
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-bottom: 15px;
+}
+.loginTextStyle {
+  color: #586069;
+  font-size: 14px;
+}

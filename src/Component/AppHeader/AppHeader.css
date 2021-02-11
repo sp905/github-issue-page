@@ -1,0 +1,36 @@
+/** @format */
+
+.tabContainerStyle {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 3px -5px, rgba(0, 0, 0, 0.19) 0px 0px 0px 0px;
+  background-color: #fafbfc;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 25px;
+}
+.tabChildStyle {
+  display: flex;
+  padding-bottom: 15px;
+  width: 120px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #fa826b;
+  justify-content: center;
+  cursor: pointer;
+}
+.tabIssueTextStyle {
+  padding-left: 10px;
+  padding-right: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tabCountStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 27px;
+  height: 20px;
+  border-radius: 8px;
+  font-size: 12px;
+  background-color: #e6e8ec;
+}
