@@ -2,7 +2,7 @@
 
 import React from "react";
 import Loading from "../../Component/LoadingComponent";
-import { CommentData } from "../../AppService";
+import { commentData } from "../../AppService";
 import "./detail.css";
 import DetailHeader from "./DetailHeader";
 import DetailRow from "./DetailRow";
@@ -12,7 +12,7 @@ export default class DetailComponent extends React.Component {
     let { data } = this.props;
     let { number } = data || {};
     this.setState({ loading: true });
-    const { data: commentsData = [] } = await CommentData({ number });
+    const { data: commentsData = [] } = await commentData({ number });
     this.setState({ data, commentsData, loading: false });
   }
 

@@ -5,7 +5,7 @@ import Pagination from "../Pagination";
 import Loading from "../LoadingComponent";
 import TableRow from "./TableRow";
 import "./table.css";
-import { AllIssues } from "../../AppService";
+import { allIssues } from "../../AppService";
 export default class Table extends React.Component {
   state = {
     tab: "open",
@@ -17,7 +17,7 @@ export default class Table extends React.Component {
 
   fetchData = async ({ tab, numberPage = 1 }) => {
     this.setState({ loading: true });
-    let { data } = await AllIssues({
+    let { data } = await allIssues({
       state: tab,
       page: numberPage,
       per_page: this.perPage,

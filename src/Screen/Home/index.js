@@ -5,12 +5,12 @@ import AppHeader from "../../Component/AppHeader";
 import { Table } from "../../Component/Table";
 import { Details } from "../Details";
 import "./home.css";
-import { AllIssues } from "../../AppService";
+import { allIssues } from "../../AppService";
 export default class Home extends React.Component {
   state = { issueTabs: true };
   componentDidMount = async () => {
     this.setState({ loading: true });
-    const { data = [] } = await AllIssues({ state: "all" });
+    const { data = [] } = await allIssues({ state: "all" });
     let openCount = 0;
     let closedCount = 0;
     data.map((value) => {
