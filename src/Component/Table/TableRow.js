@@ -23,6 +23,7 @@ export default class TableRow extends React.Component {
         className={[
           totalLength - 1 === index ? "listLastRowStyle" : "listRowStyle",
           selected === index ? "onMouseOver" : "onMouseLeave",
+          index == 0 && "listFirstRowStyle",
         ].join(" ")}
       >
         <div style={{ flexDirection: "row", display: "flex" }}>

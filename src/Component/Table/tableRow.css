@@ -30,6 +30,20 @@
   border-bottom-right-radius: 5px;
   border-bottom-width: 1px;
 }
+.listFirstRowStyle {
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  border-color: #4344454a;
+  padding: 10px;
+  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 
 .titleTextStyle {
   padding-left: 10px;
