@@ -6,7 +6,7 @@ import axios from "axios";
 const octokit = new Octokit();
 octokit.auto_paginate = true;
 const githubUrl = "https://api.github.com/graphql";
-const token="094ff231a5618290affb1a77a648411130012781"
+const token = "use access token here";
 const oauth = { Authorization: "bearer " + token };
 let totalCount = 0;
 let openCount = 0;
