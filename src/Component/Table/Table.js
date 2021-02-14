@@ -5,7 +5,7 @@ import Pagination from "../Pagination";
 import Loading from "../LoadingComponent";
 import TableRow from "./TableRow";
 import "./table.css";
-import { allIssues } from "../../AppService";
+import { allIssues, totalCountMethod } from "../../AppService";
 export default class Table extends React.Component {
   state = {
     tab: "open",
@@ -13,7 +13,7 @@ export default class Table extends React.Component {
     DataJSON: [],
     loading: false,
   };
-  perPage = 4;
+  perPage = 8;
 
   fetchData = async ({ tab, numberPage = 1 }) => {
     this.setState({ loading: true });
@@ -21,12 +21,14 @@ export default class Table extends React.Component {
       state: tab,
       page: numberPage,
       per_page: this.perPage,
-      direction: "asc",
+      direction: "des",
     });
     this.setState({ loading: false, DataJSON: data, currentPage: numberPage, tab });
   };
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.fetchData({ tab: this.state.tab });
+    const { openCount, closedCount } =  totalCountMethod();
+    this.setState({ openCount, closedCount });
   };
   changeCurrentPage = (numberPage) => {
     let { tab } = this.state;
@@ -42,10 +44,8 @@ export default class Table extends React.Component {
     this.setState({ selected: "" });
   };
   render() {
-    let { currentPage, tab, loading, DataJSON = [] } = this.state;
-    let { closedCount, openCount } = this.props;
+    let { currentPage, tab, loading, DataJSON = [], openCount = 0, closedCount = 0 } = this.state;
     let pagingCount = tab == "open" ? Math.ceil(openCount / this.perPage) : Math.ceil(closedCount / this.perPage);
-
     return (
       <div className="tableContainerStyle">
         <Loading loading={loading} />
@@ -53,7 +53,15 @@ export default class Table extends React.Component {
         <div className="rowContainerStyle">
           {DataJSON.map((value, index) => {
             return (
-              <TableRow {...this.props} {...this.state} totalLength={DataJSON.length} data={value} onMouseLeave={this.onMouseLeave} onMouseOver={this.onMouseOver} index={index} />
+              <TableRow
+                {...this.props}
+                {...this.state}
+                totalLength={DataJSON.length}
+                data={value}
+                onMouseLeave={this.onMouseLeave}
+                onMouseOver={this.onMouseOver}
+                index={index}
+              />
             );
           })}
         </div>

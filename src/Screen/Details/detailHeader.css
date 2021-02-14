@@ -8,6 +8,10 @@
   align-items: center;
   padding-left: 20px;
   font-size: 25px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .numberStyle {
   color: #6a737d;

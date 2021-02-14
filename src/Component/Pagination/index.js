@@ -135,9 +135,9 @@ export default class ReactPagination extends React.Component {
           borderRadius: 5,
           paddingTop: 3,
           paddingBottom: 3,
-          paddingLeft: 10,
-          paddingRight: 10,
-          width: 15,
+          paddingLeft:10,
+          paddingRight: no >90 ? 20: 10,
+          width: 25,
           color: no === currentPage ? "white" : "black",
           backgroundColor: no === currentPage ? "#59da59" : "white",
           border: no === currentPage ? `1px solid white` : `1px solid gray`,
@@ -156,7 +156,15 @@ export default class ReactPagination extends React.Component {
     let { viewStyle, boxStyle } = style || {};
     return (
       <div style={viewStyle}>
+       
         {this.showPrev()}
+        {currentPage >5 ? (
+          <div style={{ display: "flex" }}>
+            {this.buttonClick({ no: 1, currentPage, boxStyle })}
+            <div style={{ paddingLeft: 5 ,paddingRight:2}}>...</div>
+
+          </div>
+        ) : null}
         {firstThreeArray.map((no, index) => {
           return this.buttonClick({ no, currentPage, boxStyle });
         })}

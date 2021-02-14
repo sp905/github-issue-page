@@ -5,40 +5,28 @@ import AppHeader from "../../Component/AppHeader";
 import { Table } from "../../Component/Table";
 import { Details } from "../Details";
 import "./home.css";
-import { allIssues } from "../../AppService";
+import { IssueCount, totalCountMethod } from "../../AppService";
 export default class Home extends React.Component {
   state = { issueTabs: true };
-  componentDidMount = async () => {
-    this.setState({ loading: true });
-    const { data = [] } = await allIssues({ state: "all" });
-    let openCount = 0;
-    let closedCount = 0;
-    data.map((value) => {
-      if (value.state === "open") {
-        openCount++;
-      }
-      if (value.state === "closed") {
-        closedCount++;
-      }
-    });
-    this.setState({ openCount, closedCount, issueCount: data.length, oldData: data, loading: false });
-  };
+  componentDidMount() {
+    let {totalCount} = totalCountMethod();
+    this.setState({ totalCount });
+  }
   isIssueTab = () => {
     this.setState({ issueTabs: true });
   };
   detailMethod = (value) => {
-    this.setState({ detailData: value, issueTabs: false });
+    localStorage.setItem("data", JSON.stringify(value));
+    this.props.history.push({
+      pathname: "/detail",
+      detailData: value,
+    });
   };
   render() {
-    let { issueTabs, detailData } = this.state;
     return (
       <div style={{ flex: 1 }}>
         <AppHeader {...this.props} isIssueTab={this.isIssueTab} {...this.state} />
-        {issueTabs ? (
-          <Table {...this.props} {...this.state} detailMethod={this.detailMethod} />
-        ) : (
-          <Details routing={this.routing} data={detailData} />
-        )}
+        <Table {...this.props} {...this.state} detailMethod={this.detailMethod} />
       </div>
     );
   }
