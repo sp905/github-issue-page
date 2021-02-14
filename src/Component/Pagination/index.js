@@ -126,7 +126,10 @@ export default class ReactPagination extends React.Component {
       </a>
     );
   };
-  buttonClick = ({ no, currentPage, boxStyle }) => {
+  buttonClick = ({ no, currentPage,totalPages, boxStyle }) => {
+    if(totalPages===no){
+      return null
+    }
     return (
       <div
         onClick={() => this.changeCurrentPage(no)}
@@ -135,8 +138,8 @@ export default class ReactPagination extends React.Component {
           borderRadius: 5,
           paddingTop: 3,
           paddingBottom: 3,
-          paddingLeft:10,
-          paddingRight: no >90 ? 20: 10,
+          paddingLeft: 10,
+          paddingRight: no > 90 ? 20 : 10,
           width: 25,
           color: no === currentPage ? "white" : "black",
           backgroundColor: no === currentPage ? "#59da59" : "white",
@@ -151,26 +154,27 @@ export default class ReactPagination extends React.Component {
     );
   };
   render() {
-    let { firstThreeArray = [] } = this.state;
+    let { firstThreeArray = [1] } = this.state;
+    if (!firstThreeArray.length) {
+      firstThreeArray.push(1);
+    }
     let { currentPage, style, totalPaging, totalPages } = this.props || {};
     let { viewStyle, boxStyle } = style || {};
     return (
       <div style={viewStyle}>
-       
         {this.showPrev()}
-        {currentPage >5 ? (
+        {currentPage > 5 ? (
           <div style={{ display: "flex" }}>
             {this.buttonClick({ no: 1, currentPage, boxStyle })}
-            <div style={{ paddingLeft: 5 ,paddingRight:2}}>...</div>
-
+            <div style={{ paddingLeft: 5, paddingRight: 2 }}>...</div>
           </div>
         ) : null}
         {firstThreeArray.map((no, index) => {
-          return this.buttonClick({ no, currentPage, boxStyle });
+          return this.buttonClick({ no,totalPages, currentPage, boxStyle });
         })}
         {totalPaging < totalPages ? (
           <div style={{ display: "flex" }}>
-            <div style={{ paddingLeft: 5 ,paddingRight:2}}>...</div>
+            <div style={{ paddingLeft: 5, paddingRight: 2 }}>...</div>
             {this.buttonClick({ no: totalPages, currentPage, boxStyle })}
           </div>
         ) : null}

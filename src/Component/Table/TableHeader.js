@@ -20,7 +20,8 @@ export default class TableHeader extends React.Component {
         className={tab === selectedTab ? "tabSelectedChildStyle" : "tabNotSelectedChildStyle"}
         onClick={() => tabs(selectedTab)}
       >
-        {`${count} ${text}`}
+        {/* {`${count} ${text}`} */}
+        {`${text}`}
         {this.renderImage({ value: selectedTab })}
       </div>
     );

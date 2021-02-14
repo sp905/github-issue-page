@@ -3,51 +3,69 @@
 import { BASE_URL } from "./Config";
 import { Octokit } from "@octokit/core";
 import axios from "axios";
+import parseLink from "parse-link-header";
 const octokit = new Octokit();
 octokit.auto_paginate = true;
-const githubUrl = "https://api.github.com/graphql";
-const token = "use access token here";
-const oauth = { Authorization: "bearer " + token };
-let totalCount = 0;
-let openCount = 0;
-let closedCount = 0;
+let openPageCount = 0;
+let closedPageCount = 0;
 export const totalCountMethod = () => {
-  return { totalCount, openCount, closedCount };
+  return { openPageCount, closedPageCount };
 };
-const queryClosed =
-  "{" +
-  'repository(owner:"facebook", name:"create-react-app") {' +
-  "issues(states:CLOSED) {" +
-  "totalCount" +
-  "}" +
-  "}" +
-  "}";
-const queryOpen =
-  "{" +
-  'repository(owner:"facebook", name:"create-react-app") {' +
-  "issues(states:OPEN) {" +
-  "totalCount" +
-  "}" +
-  "}" +
-  "}";
-const issueCountTagWise = async (query) => {
-  let { data } = await axios.post(githubUrl, { query }, { headers: oauth });
-  let { repository: { issues: { totalCount } } = {} } = data.data;
-  return totalCount;
+const isLastPage = (pageLinks) => {
+  return Object.keys(pageLinks).length === 2 && pageLinks.first && pageLinks.prev;
+};
+const getPageCount = (pageLinks) => {
+  if (!pageLinks) {
+    return 0;
+  }
+  if (isLastPage(pageLinks)) {
+    return parseInt(pageLinks.prev.page, 10) + 1;
+  } else if (pageLinks.last) {
+    return parseInt(pageLinks.last.page, 10);
+  } else {
+    return 0;
+  }
+};
+export const pageCount = ({ per_page, state }) => {
+  const url = `${BASE_URL}?per_page=${per_page}&state=${state}`;
+  return axios
+    .get(url)
+    .then((res) => {
+      const pageLinks = parseLink(res.headers.link);
+      const pageCount = getPageCount(pageLinks);
+      return {
+        pageLinks,
+        pageCount,
+      };
+    })
+    .catch((err) => Promise.reject(err));
 };
 export const IssueCount = async () => {
-  openCount = await issueCountTagWise(queryOpen);
-  closedCount = await issueCountTagWise(queryClosed);
-  totalCount = openCount + closedCount;
-  return { openCount, closedCount };
+   try{
+    let { pageCount: openC } = await pageCount({ per_page: 8, state: "open" });
+    let { pageCount: closedC } = await pageCount({ per_page: 8, state: "closed" });
+    openPageCount = openC;
+    closedPageCount = closedC;
+    return { openPageCount, closedPageCount };
+   }catch(err){
+    console.log(err);
+   }
 };
 
 export const allIssues = async (filter) => {
-  const { data } = await octokit.request(`${BASE_URL}/issues`, filter);
-  return { data };
+  try {
+    const { data } = await octokit.request(`${BASE_URL}`, filter);
+    return { data };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const commentData = async ({ number }) => {
-  const { data } = await octokit.request(`${BASE_URL}/issues/${number}/comments`);
-  return { data };
+    try{
+      const { data } = await octokit.request(`${BASE_URL}/${number}/comments`);
+      return { data };
+    }catch(err){
+      console.log(err)
+    }
 };

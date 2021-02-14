@@ -14,7 +14,6 @@ export default class Table extends React.Component {
     loading: false,
   };
   perPage = 8;
-
   fetchData = async ({ tab, numberPage = 1 }) => {
     this.setState({ loading: true });
     let { data } = await allIssues({
@@ -27,8 +26,8 @@ export default class Table extends React.Component {
   };
   componentDidMount = async () => {
     this.fetchData({ tab: this.state.tab });
-    const { openCount, closedCount } =  totalCountMethod();
-    this.setState({ openCount, closedCount });
+    const { openPageCount, closedPageCount } = totalCountMethod();
+    this.setState({ openPageCount, closedPageCount });
   };
   changeCurrentPage = (numberPage) => {
     let { tab } = this.state;
@@ -44,8 +43,18 @@ export default class Table extends React.Component {
     this.setState({ selected: "" });
   };
   render() {
-    let { currentPage, tab, loading, DataJSON = [], openCount = 0, closedCount = 0 } = this.state;
-    let pagingCount = tab == "open" ? Math.ceil(openCount / this.perPage) : Math.ceil(closedCount / this.perPage);
+    let {
+      openPageCount,
+      closedPageCount,
+      currentPage,
+      tab,
+      loading,
+      DataJSON = [],
+      // openCount = 0,
+      // closedCount = 0,
+    } = this.state;
+    // let pagingCount = tab == "open" ? Math.ceil(openCount / this.perPage) : Math.ceil(closedCount / this.perPage);
+    let pagingCount = tab == "open" ? openPageCount : closedPageCount;
     return (
       <div className="tableContainerStyle">
         <Loading loading={loading} />
